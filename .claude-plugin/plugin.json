@@ -1,0 +1,17 @@
+{
+  "name": "tpm",
+  "description": "AI-First Technical Program Management — agent skills for TPMs covering program setup, kickoff, planning, backlog, estimation, and health monitoring.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Aleksey Vyazovsky"
+  },
+  "repository": "https://github.com/vyazovsky/aitpm",
+  "license": "MIT",
+  "skills": "./skills",
+  "agents": [
+    "./agents/program-brain.md",
+    "./agents/knowledge-agent.md",
+    "./agents/requirements-agent.md",
+    "./agents/communications-agent.md"
+  ]
+}
