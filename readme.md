@@ -5,7 +5,8 @@ Build Technical Program Management framework to level-up program management prac
 AITPM framework makes sure no essentials missed and provide the recommendations for a TPM descisions.
 It provides program teams with the structured set of the requirements, documents, standards, data, capabilities to accomplish their goals.
 
-TODO: Business Value 
+Business Value 
+Deliver reliably more programs, more predictably, at lower risk and cost by ensuring every program runs according to plan, identifying and resolving deviations early, and always having a reliable visibility into program health to make confident business decisions.
 
 # Current Capabilities 
 
@@ -16,13 +17,21 @@ TODO: Business Value
 | [Design / Architecture](design.md) | - Ensure the solution is scalable, maintainable, secure, and cost-aware.<br>- Align implementation with architecture, platform, and security standards.<br>- Decouple work to minimize late-cycle rework and cross-team blocking.<br>- Embed quality, security, and compliance into the design (defense in depth). | - Coordinate design/architecture reviews with tech leads, security, infra, and data teams.<br>- Capture key design decisions (ADRs), trade-offs, and risk areas, including security and data-protection design choices.<br>- Ensure logging, monitoring, and observability for quality and security events are part of the design.<br>- Confirm that design supports required checks (static analysis, dependency scanning, secret scanning, license scanning, runtime security) via chosen tooling and pipelines. |
 | [Implementation / Development](implementation.md) | - Deliver increments predictably while maintaining code quality, security, and tech health.<br>- Surface blockers, risks, and scope changes early.<br>- Keep the team aligned to roadmap, capacity, and milestones.<br>- Catch code-quality, security, and license issues as early as possible (“shift left”). | - Facilitate backlog refinement, sprint planning, and cross-team coordination.<br>- Ensure static code analysis, linters, and formatting tools are integrated and required on every PR/commit.<br>- Ensure SAST, secrets scanning, and SCA/license scanning run in CI and enforce agreed quality gates for merges (e.g., no new critical issues, no disallowed licenses).<br>- Track scan results and code-quality metrics; coordinate triage of issues and allocation of capacity to remediate them.<br>- Monitor delivery health (velocity, burndown, defect trends) and escalate systemic risks or scope changes. |
 | [Testing / QA](testing.md) | - Validate that features meet functional and non-functional requirements.<br>- Reduce regressions and production defects through strong test coverage.<br>- Ensure release candidates meet quality, security, and compliance thresholds.<br>- Treat critical scan and test failures as release-blocking. | - Coordinate test planning across unit, integration, E2E, performance, security, and compatibility testing.<br>- Ensure quality gates include test coverage, defect severity thresholds, and results of security and license scans for the release branch.<br>- Drive triage and prioritization of defects and scan findings; track resolution to meet release criteria.<br>- Align QA, product, and security on “release-ready” definition and sign-off process. |
-| [Deployment / Release](deployment.md) | - Deploy changes safely with clear rollback options and monitoring.<br>- Minimize user impact during rollouts and cutovers.<br>- Ensure all release gates (quality, security, licenses, compliance) are satisfied before go-live.<br>- Provide clear visibility to stakeholders during and after release. | - Own the release plan: rollout strategy (canary, phased, feature flags), timing, roles, and rollback strategy.<br>- Verify that all required checks (tests, SAST/SCA, penetration test where applicable, license compliance, approvals) have passed before deployment.<br>- Coordinate with SRE/infra for environment readiness, monitoring, alerting, and access control.<br>- Run release “war room” or coordination channels; track status, incidents, and communications to stakeholders and customers. |
+| [Deployment / Release](deployment.md) | - Deploy changes safely with clear rollback options and monitoring.<br>- Minimize user impact during rollouts and cutovers.<br>- Ensure all release gates (quality, security, licenses, compliance) are satisfied before go-live.<br>- Provide clear visibility to stakeholders during and after release. | - Own the release plan: rollout strategy (canary, phased, feature flags), timing, roles, and rollback strategy.<br>- Verify that all required checks (tests, SAST/SCA, penetration test where applicable, license compliance, approvals) have passed before deployment.<br>- Coordinate with SRE/infra for environment readiness, monitoring, alerting, and access control.<br>- Run release “war room” or coordination channels; track status, incidents, and communications to stakeholders and customers.|
+
 | [Maintenance / Operations](operations.md) | - Preserve system health, reliability, security, and performance over time.<br>- Manage incidents, vulnerabilities, tech debt, and operational toil systematically.<br>- Ensure ongoing compliance with security, privacy, and license obligations.<br>- Feed learnings and metrics back into planning and process improvements. | - Set up and maintain incident management processes (on-call, SLAs, postmortems) and track follow-up actions.<br>- Coordinate patching, upgrades, vulnerability management, and periodic rescans (code, dependencies, licenses, infrastructure).<br>- Track operational metrics (availability, latency, error rates), security metrics (vuln backlog, mean-time-to-remediate), and cost metrics and ensure they inform backlogs and planning.<br>- Facilitate retrospectives and continuous-improvement initiatives to refine SDLC, quality, and security practices across stages. |
 
-
+# Processes
+Timeline Management
+Knowledge Management
+Risk Management
+Dependency Management
+Communication Management
+Stakeholder Management
+Reporting
 
 TODO:
-actions
+Actions
 
 Product
 /dor
