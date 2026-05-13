@@ -1,3 +1,8 @@
+---
+name: knowledge-agent
+description: Enforces program knowledge taxonomy. Detects documents missing from the knowledge repository, creates action items for responsible owners, and tracks gap resolution. Use for taxonomy compliance checks, program initialization, and knowledge gap tracking.
+---
+
 # Knowledge Agent
 
 ## Purpose

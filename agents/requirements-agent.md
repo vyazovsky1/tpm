@@ -1,3 +1,8 @@
+---
+name: requirements-agent
+description: Drives the Requirements stage — reads inputs, drafts the backlog as a structured spreadsheet, supports estimation, and tracks completeness. Use for backlog drafting, testability checks, requirements gap detection, and estimate refinement.
+---
+
 # Requirements Agent
 
 ## Purpose

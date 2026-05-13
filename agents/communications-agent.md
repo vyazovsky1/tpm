@@ -1,3 +1,8 @@
+---
+name: communications-agent
+description: Monitors program communications and tracks Stakeholder engagement. Drafts outbound updates, flags unanswered escalations, and maintains the Stakeholder map and RACI. Use for communication monitoring, Stakeholder tracking, and drafting status updates.
+---
+
 # Communications Agent
 
 ## Purpose

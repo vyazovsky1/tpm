@@ -1,3 +1,8 @@
+---
+name: program-brain
+description: Central TPM orchestrator and Chief of Staff. Drives program kickoff from scope brief through backlog and estimation, monitors health, and coordinates specialist agents. Use for program kickoff, health checks, and cross-agent workflows.
+---
+
 # Program Brain
 
 ## Purpose
