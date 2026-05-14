@@ -5,7 +5,16 @@ description: Scaffolds a new AITPM program folder. Use when starting a new progr
 
 # TPM: Init
 
-Scaffold a new program folder from the AITPM framework.
+## Overview
+
+Scaffolds a new program folder from the AITPM framework. Creates the standard directory structure, copies program state templates, generates a `CLAUDE.md` with the framework path baked in, and sets up local data source directories. The result is a ready-to-use program folder that references this plugin for all agent definitions.
+
+## When to Use
+
+- Starting a new program that needs AITPM structure
+- Onboarding an existing folder (e.g. one that already has documents) into the framework
+
+**When NOT to use:** A program folder already fully initialized — running init again on a complete folder adds nothing new.
 
 ## Steps
 
