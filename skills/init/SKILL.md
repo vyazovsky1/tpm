@@ -7,7 +7,7 @@ description: Scaffolds a new AITPM program folder. Use when starting a new progr
 
 ## Overview
 
-Scaffolds a new program folder from the AITPM framework. Creates the standard directory structure, creates one folder per stream from the per-stream template, generates a `CLAUDE.md` with the framework path baked in, and sets up local data source directories. The result is a ready-to-use program folder that references this plugin for all agent definitions.
+Scaffolds a new program folder from the AITPM framework. Creates the standard directory structure, creates one folder per stream from the per-stream template, generates a `CLAUDE.md` with the framework path baked in, writes a starter `integrations.md` registry, and creates the `.data/` integration cache. The result is a ready-to-use program folder that references this plugin for all agent definitions.
 
 ## When to Use
 
@@ -37,7 +37,7 @@ bash ${CLAUDE_PLUGIN_ROOT}/skills/init/scripts/init.sh "<program-name>" "<target
 If the script exits with code 2 and prints `EXISTS`, the folder already exists. Tell the user:
 - The folder already exists at `<target-path>`
 - Existing files will not be overwritten
-- The AITPM structure (program state, data directories, CLAUDE.md) will be added alongside them
+- The AITPM structure (program state, `integrations.md`, `.data/` cache, CLAUDE.md) will be added alongside them
 
 Ask the user to confirm before proceeding.
 

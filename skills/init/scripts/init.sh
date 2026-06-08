@@ -10,7 +10,18 @@
 set -euo pipefail
 
 FRAMEWORK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../" && pwd)"
-TEMPLATE_DIR="$FRAMEWORK_DIR/program/streams/_template"
+STREAM_TEMPLATE_DIR="$FRAMEWORK_DIR/program/streams/_template"
+ROOT_TEMPLATE_DIR="$FRAMEWORK_DIR/program/templates"
+
+# render <template-file> <dest-file>
+# Copies a template, substituting {{TOKEN}} placeholders. Uses '|' as the sed
+# delimiter so values containing '/' (e.g. framework paths) need no escaping.
+render() {
+  sed -e "s|{{PROGRAM_NAME}}|$PROGRAM_NAME|g" \
+      -e "s|{{FRAMEWORK_DIR}}|$FRAMEWORK_DIR|g" \
+      -e "s|{{STREAMS}}|${STREAMS[*]}|g" \
+      "$1" > "$2"
+}
 
 PROGRAM_NAME="${1:-}"
 TARGET_PATH="${2:-}"
@@ -48,7 +59,7 @@ echo "Streams   : ${STREAMS[*]}"
 echo ""
 
 echo "Creating directory structure..."
-mkdir -p "$TARGET_PATH"/{streams,data/{emails,docs,meetings,chat}}
+mkdir -p "$TARGET_PATH"/{streams,.data}
 
 echo "Creating streams from template..."
 for stream in "${STREAMS[@]}"; do
@@ -57,78 +68,22 @@ for stream in "${STREAMS[@]}"; do
     echo "  - $stream (exists, skipped)"
     continue
   fi
-  cp -r "$TEMPLATE_DIR" "$dest"
-  # Substitute the <stream-name> placeholder with the actual stream name.
-  find "$dest" -name '*.md' -exec sed -i "s/<stream-name>/$stream/g" {} +
+  cp -r "$STREAM_TEMPLATE_DIR" "$dest"
+  # Substitute the {{STREAM}} placeholder with the actual stream name.
+  find "$dest" -name '*.md' -exec sed -i "s|{{STREAM}}|$stream|g" {} +
   echo "  - $stream"
 done
 
-echo "Creating data source directories..."
-cat > "$TARGET_PATH/data/README.md" <<EOF
-# Local Data Sources
+echo "Creating integration cache..."
+render "$ROOT_TEMPLATE_DIR/data-README.md" "$TARGET_PATH/.data/README.md"
 
-Drop local files here as substitutes for live integrations.
-
-| Directory  | Replaces         | Format                              |
-|-----------|------------------|-------------------------------------|
-| emails/   | Gmail            | .eml or .txt files                  |
-| docs/     | Google Drive     | .md, .txt, .pdf files               |
-| meetings/ | Google Calendar  | Meeting notes as .md files          |
-| chat/     | Google Chat      | Exported chat logs as .txt or .md   |
-
-Agents will read from these directories when live integrations are not configured.
-EOF
+echo "Generating integrations.md..."
+render "$ROOT_TEMPLATE_DIR/integrations.md" "$TARGET_PATH/integrations.md"
 
 echo "Generating CLAUDE.md..."
-cat > "$TARGET_PATH/CLAUDE.md" <<EOF
-# Program: $PROGRAM_NAME
+render "$ROOT_TEMPLATE_DIR/CLAUDE.md" "$TARGET_PATH/CLAUDE.md"
 
-## Framework
-AITPM framework location: $FRAMEWORK_DIR
-
-All agent definitions, process descriptions, and integration specs are in the framework directory above.
-This folder contains program-specific state and data only.
-
-## Program State
-There is no \`/program\` folder. All live state lives under \`streams/<stream>/\`, one folder per
-stream (track / workstream). The set of subfolders under \`streams/\` is the stream registry.
-Each stream folder contains: \`context.md\`, \`team.md\`, \`action-items.md\`, \`raid.md\`,
-\`decisions.md\`, \`knowledge.md\`, \`meetings.md\`, \`communications.md\`, and \`history/\`.
-All files are maintained by agents and require TPM approval before changes are committed.
-
-Current streams: ${STREAMS[*]}
-
-To add a stream later, copy the framework template:
-  cp -r $FRAMEWORK_DIR/program/streams/_template streams/<new-stream>
-
-## Data Sources
-Local data files are in \`/data\`. Drop exported emails, documents, meeting notes, and chat logs there.
-Agents will read from \`/data\` when live integrations are not configured.
-
-## Agent Instructions
-When running any agent, always:
-1. Read the agent definition from \`$FRAMEWORK_DIR/agents/<agent-name>.md\`
-2. Read the relevant process from \`$FRAMEWORK_DIR/processes/<process-name>.md\`
-3. Identify the active stream and read its state from \`./streams/<stream>/\`,
-   starting with \`context.md\` and \`team.md\`
-4. Read data from \`./data/\` as the local data source
-
-## Conventions
-- Role names are always capitalized: Engineering, Product, Stakeholders, QA, SRE
-- All agent outputs require TPM approval before being written to \`streams/<stream>/\`
-- Never commit \`.env\` — credentials stay local
-
-## Launching with TPM Skills
-Open this folder with the TPM plugin to get \`/tpm:\` commands:
-
-  claude --plugin-dir $FRAMEWORK_DIR .
-EOF
-
-cat > "$TARGET_PATH/.gitignore" <<EOF
-.env
-.envrc
-data/
-EOF
+cp "$ROOT_TEMPLATE_DIR/gitignore" "$TARGET_PATH/.gitignore"
 
 echo ""
 echo "✓ Program folder created at: $TARGET_PATH"
@@ -137,7 +92,7 @@ echo "Next steps:"
 echo "  1. cd $TARGET_PATH"
 echo "  2. Open with TPM plugin: claude --plugin-dir $FRAMEWORK_DIR ."
 echo "  3. Run /tpm:kickoff to start the program"
-echo "  4. Add inputs to ./data/ (emails, docs, meeting notes)"
+echo "  4. Configure sources in ./integrations.md (fetched data caches to ./.data/<source>/)"
 echo ""
 
 printf '{"status": "created", "program": "%s", "path": "%s", "streams": "%s"}\n' \

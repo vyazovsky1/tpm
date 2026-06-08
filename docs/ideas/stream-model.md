@@ -20,7 +20,8 @@ Generated program folders drop the `/program` folder. Everything lives under `st
       communications.md # email/chat comms log
       history/          # archived closed items, past meetings, retired agendas
     fraud-detection/ ...
-  data/                 # program inputs
+  integrations.md       # integration registry (sources → scope → stream)
+  .data/<source>/       # integration cache (gitignored, regenerable)
   .claude/              # commands + config
 ```
 

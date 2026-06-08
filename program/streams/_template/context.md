@@ -1,4 +1,4 @@
-# Stream: <stream-name>
+# Stream: {{STREAM}}
 
 _Maintained by Program Brain. All changes require TPM approval._
 

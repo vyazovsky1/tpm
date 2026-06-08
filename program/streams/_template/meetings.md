@@ -1,4 +1,4 @@
-# Meeting Log — <stream-name>
+# Meeting Log — {{STREAM}}
 
 _Maintained by Meetings Agent. All changes require TPM approval._
 

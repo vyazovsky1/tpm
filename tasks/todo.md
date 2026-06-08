@@ -47,6 +47,21 @@ Drop the `/program` folder from generated program folders; everything lives unde
 - [x] Update `CLAUDE.md` to document the streams-only structure
 - [~] **Open question:** `context.md` shipped as a light fixed template (Overview / Scope / Milestones / Standing Instructions / Key Contacts). Confirm this is the desired shape or revise.
 
+## Task 8b — Integration registry + cache redesign ✓
+Replaced the flat `data/{emails,docs,meetings,chat}` input dropbox with a registry + cache model.
+- [x] `integrations.md` at program root — markdown registry binding each source (named for its framework spec / MCP server) to scope + stream; committed, no secrets; hand- or script-editable
+- [x] `/.data/<source>/` — integration cache, one subfolder per source; gitignored, regenerable
+- [x] `init.sh` — create `.data/`, emit starter `integrations.md`, `.gitignore` → `.data/`, updated generated CLAUDE.md + completion hints
+- [x] Framework `CLAUDE.md` — document registry + cache; source-name consistency rule in "Adding a New Integration"
+- [x] `skills/backlog/SKILL.md`, `skills/init/SKILL.md`, `docs/ideas/stream-model.md` — replace `./data/...` reads with `integrations.md` + `.data/<source>/`
+
+## Task 8c — Extract scaffold content into templates ✓
+No hardcoded template content in scripts. All scaffold content lives as real files; `init.sh` only copies + substitutes.
+- [x] `program/templates/` — program-root scaffold files: `CLAUDE.md`, `integrations.md`, `gitignore`, `data-README.md`
+- [x] `{{TOKEN}}` mustache placeholders (`{{PROGRAM_NAME}}`, `{{FRAMEWORK_DIR}}`, `{{STREAMS}}`); harmonized stream template `<stream-name>` → `{{STREAM}}`
+- [x] `init.sh` — `render()` helper (sed, `|` delimiter); replaced all four heredocs with `render`/`cp` from `program/templates/`
+- [x] Framework `CLAUDE.md` — "Scaffold Templates" section + Directory Structure updated; verified byte-identical scaffolder output
+
 ## Task 9 — Meetings Agent
 Stream-scoped agent: ingest notes → summary + action items → follow-up agenda. Built on Task 8.
 - [ ] `agents/meetings-agent.md`

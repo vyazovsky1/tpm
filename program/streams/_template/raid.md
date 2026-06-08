@@ -1,4 +1,4 @@
-# RAID Log — <stream-name>
+# RAID Log — {{STREAM}}
 
 _Maintained by Program Brain. All changes require TPM approval._
 

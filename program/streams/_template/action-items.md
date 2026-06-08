@@ -1,4 +1,4 @@
-# Action Items — <stream-name>
+# Action Items — {{STREAM}}
 
 _Maintained by Meetings Agent and Communications Agent. All changes require TPM approval._
 

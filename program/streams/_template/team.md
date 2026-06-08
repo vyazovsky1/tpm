@@ -1,4 +1,4 @@
-# Team & Stakeholders — <stream-name>
+# Team & Stakeholders — {{STREAM}}
 
 _Maintained by Communications Agent. All changes require TPM approval._
 

@@ -1,4 +1,4 @@
-# Knowledge Index — <stream-name>
+# Knowledge Index — {{STREAM}}
 
 _Maintained by Knowledge Agent. All changes require TPM approval._
 
