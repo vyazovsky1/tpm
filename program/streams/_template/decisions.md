@@ -1,4 +1,4 @@
-# Decision Log
+# Decision Log — <stream-name>
 
 _Maintained by Knowledge Agent. All changes require TPM approval._
 

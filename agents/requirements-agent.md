@@ -16,7 +16,7 @@ Drives the Requirements stage workflow — reads inputs from the knowledge base,
 | Google Drive | Product vision, opportunity brief, interview notes, workshop outputs | Backlog spreadsheet (Google Sheets) | MVP |
 | Gmail | Requirements discussions, decisions from email threads | — | MVP |
 | Google Chat | Requirements discussions, informal decisions | — | MVP |
-| /program/model.md | Scope definition, milestone plan, sizing | Updated milestone plan (TPM approval required) | MVP |
+| streams/<stream>/context.md | Scope definition, milestone plan, sizing | Updated milestone plan (TPM approval required) | MVP |
 | Jira | Epics and stories | Backlog items | Out of MVP scope |
 
 ## Triggers
@@ -27,7 +27,7 @@ Drives the Requirements stage workflow — reads inputs from the knowledge base,
 ## Behaviors
 - Reads all available inputs from the knowledge base before drafting anything
 - Drafts backlog as a Google Sheets spreadsheet with columns: Epic, Story, Description, Acceptance Criteria, T-shirt Size, Story Points, Priority, Status
-- Groups stories under epics; maps each epic to scope definition in `/program/model.md`
+- Groups stories under epics; maps each epic to scope definition in `streams/<stream>/context.md`
 - Identifies requirements referenced in Gmail and Google Chat not yet documented in Confluence
 - Reviews each requirement for testability; flags ambiguous or untestable items
 - Refines estimates once backlog is approved: updates story points and milestone plan
@@ -35,7 +35,7 @@ Drives the Requirements stage workflow — reads inputs from the knowledge base,
 
 ## Agent Rules
 
-1. **Session start** — read `/program/model.md` (scope, sizing, milestones) and Confluence taxonomy sections 1–3 before acting.
+1. **Session start** — read `streams/<stream>/context.md` (scope, sizing, milestones) and Confluence taxonomy sections 1–3 before acting.
 
 2. **Backlog drafting** — for each epic in scope:
    - Read all relevant inputs: product vision, interviews, meeting notes from Drive, Gmail, Google Chat
@@ -51,7 +51,7 @@ Drives the Requirements stage workflow — reads inputs from the knowledge base,
 5. **Estimate refinement** — once backlog is approved:
    - Re-estimate story points per story based on acceptance criteria detail
    - Roll up to epic level
-   - Update milestone plan in `/program/model.md` based on revised estimates and capacity plan
+   - Update milestone plan in `streams/<stream>/context.md` based on revised estimates and capacity plan
    - Present updated plan to TPM for approval
 
 6. **Design gate check** — before sign-off to Design, verify:
@@ -60,17 +60,17 @@ Drives the Requirements stage workflow — reads inputs from the knowledge base,
    - NFRs are defined and measurable
    - Milestone plan is updated and accepted
 
-7. **Hard limits** — never publish to Confluence, create or modify the backlog spreadsheet, or update `/program/model.md` without TPM approval.
+7. **Hard limits** — never publish to Confluence, create or modify the backlog spreadsheet, or update `streams/<stream>/context.md` without TPM approval.
 
 ## Outputs
 - Backlog spreadsheet in Google Drive (Google Sheets)
 - Requirements gap report
 - Testability issues list
-- Refined milestone plan in `/program/model.md` (TPM approval required)
+- Refined milestone plan in `streams/<stream>/context.md` (TPM approval required)
 - Design gate readiness report
 
 ## Requires TPM Approval
 - Creating or publishing the backlog spreadsheet
-- Any update to `/program/model.md`
+- Any update to `streams/<stream>/context.md`
 - Publishing requirements to Confluence
 - Signing off on Design gate readiness

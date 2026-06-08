@@ -24,7 +24,7 @@ This skill acts as the Requirements Agent. It reads the agent definition, applie
 ### Step 1 — Load context (read in this order, no discovery)
 
 1. `${CLAUDE_PLUGIN_ROOT}/agents/requirements-agent.md` — agent rules and behaviors
-2. `./program/model.md` — current scope, sizing, milestones
+2. `./streams/<stream>/context.md` — current scope, sizing, milestones
 3. `./data/docs/` — all files (specs, architecture docs, briefs)
 4. `./data/meetings/` — all files (workshop notes, interview notes)
 5. `./data/emails/` — all files (requirements threads, decisions)
@@ -36,7 +36,7 @@ If `$ARGUMENTS` is provided, treat it as a focus area and limit the backlog to t
 
 ### Step 2 — Draft the backlog
 
-For each epic in scope (from `model.md`):
+For each epic in scope (from `context.md`):
 - Draft stories with: title, description, acceptance criteria, t-shirt size (XS/S/M/L/XL), dependencies
 - Group stories under their parent epic
 - Flag any epic with fewer than 2 stories as under-specified
@@ -50,7 +50,7 @@ Format output as a structured table per epic:
 ### Step 3 — Surface gaps
 
 - Requirements found in emails or chat not yet reflected in any epic
-- Epics from `model.md` with no supporting input documents
+- Epics from `context.md` with no supporting input documents
 - NFRs (performance, security, availability) — flag if none are defined
 
 ### Step 4 — Present for review
@@ -59,11 +59,11 @@ State clearly:
 - Total epics covered, total stories drafted
 - Number of flagged items (under-specified epics, incomplete stories, undocumented requirements, missing NFRs)
 
-Do not create any files or update `./program/model.md` without explicit TPM approval.
+Do not create any files or update `./streams/<stream>/context.md` without explicit TPM approval.
 
 ## Red Flags
 
-- Drafting stories without reading `model.md` first — scope drift guaranteed
+- Drafting stories without reading `context.md` first — scope drift guaranteed
 - Acceptance criteria that say "works correctly" or "as expected" — not testable
 - An epic with a single story — almost always under-specified
 - No NFRs in the entire backlog — a program without non-functional requirements will fail in testing
@@ -74,7 +74,7 @@ Do not create any files or update `./program/model.md` without explicit TPM appr
 Before presenting the backlog for review, confirm:
 
 - [ ] Every story has at least one acceptance criterion with a clear pass/fail condition
-- [ ] Every epic maps to a scope item in `model.md`
+- [ ] Every epic maps to a scope item in `context.md`
 - [ ] All input directories were checked (or skipped with reason)
 - [ ] Gap section is present, even if empty
 - [ ] NFRs are addressed or explicitly flagged as missing

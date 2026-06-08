@@ -10,8 +10,8 @@ Maps, tracks, and monitors cross-team and cross-system dependencies. Surfaces bl
 | Jira | Epic links, issue dependencies, team capacity | — |
 | GitHub | Cross-repo dependencies, shared library versions | — |
 | Confluence | Architecture docs, integration specs | — |
-| /program/dependencies.md | Current dependency map | dependencies.md |
-| /program/model.md | Milestone plan | — |
+| streams/<stream>/raid.md | Dependencies section of the RAID log | raid.md |
+| streams/<stream>/context.md | Milestone plan | — |
 
 ## Triggers
 - Scheduled: weekly dependency health check
@@ -23,7 +23,7 @@ Maps, tracks, and monitors cross-team and cross-system dependencies. Surfaces bl
 - Identifies dependencies on the critical path
 - Flags dependencies at risk of blocking upcoming milestones
 - Tracks external team commitments and SLAs
-- Archives resolved dependencies to `/program/history/dependencies`
+- Archives resolved dependencies to `streams/<stream>/history/`
 
 ## Outputs
 - Updated dependency map (pending TPM approval)

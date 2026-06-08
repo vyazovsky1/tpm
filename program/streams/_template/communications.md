@@ -1,4 +1,4 @@
-# Communications Log
+# Communications Log — <stream-name>
 
 _Maintained by Communications Agent. All changes require TPM approval._
 

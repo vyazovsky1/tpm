@@ -28,13 +28,13 @@
 |--------|-----------|
 | Project charter | Confluence: 1. Program Overview / Charter |
 | Project kickoff slide deck | Google Drive + Confluence: 1. Program Overview |
-| Scope definition (Epics, MVP boundaries, out-of-scope) | `/program/model.md` |
-| High-level sizing (t-shirt / order-of-magnitude per epic) | `/program/model.md` + Confluence: 2. Planning |
-| Capacity plan (team availability vs. milestone timeline) | `/program/model.md` + Confluence: 2. Planning |
-| High-level roadmap and milestone plan | `/program/model.md` + Confluence: 2. Planning |
-| Stakeholder map and RACI | `/program/stakeholders.md` + Confluence: 1. Program Overview |
-| Initial risk register with owners and mitigation strategies | `/program/risks.md` |
-| Dependency map | `/program/dependencies.md` + Confluence: 2. Planning |
+| Scope definition (Epics, MVP boundaries, out-of-scope) | `streams/<stream>/context.md` |
+| High-level sizing (t-shirt / order-of-magnitude per epic) | `streams/<stream>/context.md` + Confluence: 2. Planning |
+| Capacity plan (team availability vs. milestone timeline) | `streams/<stream>/context.md` + Confluence: 2. Planning |
+| High-level roadmap and milestone plan | `streams/<stream>/context.md` + Confluence: 2. Planning |
+| Stakeholder map and RACI | `streams/<stream>/team.md` + Confluence: 1. Program Overview |
+| Initial risk register with owners and mitigation strategies | `streams/<stream>/raid.md` (Risks) |
+| Dependency map | `streams/<stream>/raid.md` (Dependencies) + Confluence: 2. Planning |
 | NFR baseline | Confluence: 3. Requirements / Non-Functional Requirements |
 
 ## Quality Gates

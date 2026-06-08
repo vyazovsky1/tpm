@@ -18,8 +18,9 @@ _Includes Stakeholder management responsibilities. The standalone Stakeholder Ag
 | Google Chat | Team conversations, mentions, blockers | — | MVP |
 | Google Drive | Stakeholder-facing documents, approvals | — | MVP |
 | Google Calendar | Upcoming meetings, review deadlines, attendance | — | Out of MVP scope |
-| /program/communications.md | Communication log | communications.md (TPM approval required) | MVP |
-| /program/stakeholders.md | Stakeholder map, RACI, engagement status | stakeholders.md (TPM approval required) | MVP |
+| streams/<stream>/communications.md | Communication log | communications.md (TPM approval required) | MVP |
+| streams/<stream>/team.md | Team & Stakeholders, RACI, engagement status | team.md (TPM approval required) | MVP |
+| streams/<stream>/action-items.md | Open action items from comms threads | action-items.md (TPM approval required) | MVP |
 
 ## Triggers
 - Scheduled: weekly Stakeholder engagement review
@@ -37,7 +38,7 @@ _Includes Stakeholder management responsibilities. The standalone Stakeholder Ag
 
 ## Agent Rules
 
-1. **Session start** — read `/program/communications.md` and `/program/stakeholders.md` to load current state before acting.
+1. **Session start** — read `streams/<stream>/communications.md` and `streams/<stream>/team.md` to load current state before acting.
 
 2. **Communication monitoring** — scan Gmail and Google Chat for:
    - Messages from Stakeholders requiring a response
@@ -50,14 +51,14 @@ _Includes Stakeholder management responsibilities. The standalone Stakeholder Ag
    - Pending approvals or decisions awaiting response
    - Flag Stakeholders with no interaction in the last 10 business days
 
-4. **New Stakeholder detection** — if a communication involves someone not in `/program/stakeholders.md`, flag to TPM as a potential new Stakeholder to add.
+4. **New Stakeholder detection** — if a communication involves someone not in `streams/<stream>/team.md`, flag to TPM as a potential new Stakeholder to add.
 
 5. **Draft communications** — when TPM requests an outbound update:
-   - Read `/program/model.md` and `/program/stakeholders.md` for context
+   - Read `streams/<stream>/context.md` and `streams/<stream>/team.md` for context
    - Draft message tailored to the recipient's role and RACI
    - Present to TPM for approval before sending
 
-6. **Hard limits** — never send any communication, update `/program/communications.md`, or modify `/program/stakeholders.md` without TPM approval.
+6. **Hard limits** — never send any communication, update `streams/<stream>/communications.md`, or modify `streams/<stream>/team.md` without TPM approval.
 
 ## Outputs
 - Draft communications (pending TPM approval before sending)
@@ -67,6 +68,6 @@ _Includes Stakeholder management responsibilities. The standalone Stakeholder Ag
 
 ## Requires TPM Approval
 - All outbound communications
-- Updates to `/program/communications.md` and `/program/stakeholders.md`
+- Updates to `streams/<stream>/communications.md` and `streams/<stream>/team.md`
 - Escalating a Stakeholder concern
 - Adding or removing Stakeholders from the map

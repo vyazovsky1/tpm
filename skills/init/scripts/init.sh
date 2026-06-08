@@ -1,52 +1,67 @@
 #!/usr/bin/env bash
 # Scaffolds a new AITPM program folder.
-# Usage: bash init.sh <program-name> <target-path> [--yes]
-#   --yes  skip confirmation when target path already exists
+# Usage: bash init.sh <program-name> <target-path> [--yes] [stream ...]
+#   --yes    skip confirmation when target path already exists
+#   stream   one or more initial stream names (default: "general")
+#
+# A program folder has NO /program folder. All state lives under
+# streams/<stream>/, copied from the framework's per-stream template.
 
 set -euo pipefail
 
 FRAMEWORK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../" && pwd)"
+TEMPLATE_DIR="$FRAMEWORK_DIR/program/streams/_template"
 
 PROGRAM_NAME="${1:-}"
 TARGET_PATH="${2:-}"
-YES_FLAG="${3:-}"
 
 if [[ -z "$PROGRAM_NAME" || -z "$TARGET_PATH" ]]; then
-  echo "Usage: bash init.sh <program-name> <target-path> [--yes]"
+  echo "Usage: bash init.sh <program-name> <target-path> [--yes] [stream ...]"
   exit 1
+fi
+shift 2
+
+YES_FLAG=""
+if [[ "${1:-}" == "--yes" ]]; then
+  YES_FLAG="--yes"
+  shift
+fi
+
+# Remaining args are stream names; default to a single "general" stream.
+STREAMS=("$@")
+if [[ ${#STREAMS[@]} -eq 0 ]]; then
+  STREAMS=("general")
 fi
 
 TARGET_PATH="${TARGET_PATH/#\~/$HOME}"
 
-if [[ -d "$TARGET_PATH" ]]; then
-  if [[ "$YES_FLAG" != "--yes" ]]; then
-    echo "WARNING: $TARGET_PATH ALREADY EXISTS."
-    exit 2
-  fi
+if [[ -d "$TARGET_PATH" && "$YES_FLAG" != "--yes" ]]; then
+  echo "WARNING: $TARGET_PATH ALREADY EXISTS."
+  exit 2
 fi
 
 echo ""
 echo "=== AITPM — New Program: $PROGRAM_NAME ==="
 echo "Framework : $FRAMEWORK_DIR"
 echo "Target    : $TARGET_PATH"
+echo "Streams   : ${STREAMS[*]}"
 echo ""
 
 echo "Creating directory structure..."
-mkdir -p "$TARGET_PATH"/{program/history/{risks,decisions,dependencies,communications},data/{emails,docs,meetings,chat}}
+mkdir -p "$TARGET_PATH"/{streams,data/{emails,docs,meetings,chat}}
 
-echo "Copying program state templates..."
-cp "$FRAMEWORK_DIR/program/model.md"          "$TARGET_PATH/program/model.md"
-cp "$FRAMEWORK_DIR/program/risks.md"          "$TARGET_PATH/program/risks.md"
-cp "$FRAMEWORK_DIR/program/dependencies.md"   "$TARGET_PATH/program/dependencies.md"
-cp "$FRAMEWORK_DIR/program/stakeholders.md"   "$TARGET_PATH/program/stakeholders.md"
-cp "$FRAMEWORK_DIR/program/decisions.md"      "$TARGET_PATH/program/decisions.md"
-cp "$FRAMEWORK_DIR/program/communications.md" "$TARGET_PATH/program/communications.md"
-cp "$FRAMEWORK_DIR/program/knowledge.md"      "$TARGET_PATH/program/knowledge.md"
-
-touch "$TARGET_PATH/program/history/risks/.gitkeep"
-touch "$TARGET_PATH/program/history/decisions/.gitkeep"
-touch "$TARGET_PATH/program/history/dependencies/.gitkeep"
-touch "$TARGET_PATH/program/history/communications/.gitkeep"
+echo "Creating streams from template..."
+for stream in "${STREAMS[@]}"; do
+  dest="$TARGET_PATH/streams/$stream"
+  if [[ -d "$dest" ]]; then
+    echo "  - $stream (exists, skipped)"
+    continue
+  fi
+  cp -r "$TEMPLATE_DIR" "$dest"
+  # Substitute the <stream-name> placeholder with the actual stream name.
+  find "$dest" -name '*.md' -exec sed -i "s/<stream-name>/$stream/g" {} +
+  echo "  - $stream"
+done
 
 echo "Creating data source directories..."
 cat > "$TARGET_PATH/data/README.md" <<EOF
@@ -75,7 +90,16 @@ All agent definitions, process descriptions, and integration specs are in the fr
 This folder contains program-specific state and data only.
 
 ## Program State
-Live program state is in \`/program\`. All files are maintained by agents and require TPM approval before changes are committed.
+There is no \`/program\` folder. All live state lives under \`streams/<stream>/\`, one folder per
+stream (track / workstream). The set of subfolders under \`streams/\` is the stream registry.
+Each stream folder contains: \`context.md\`, \`team.md\`, \`action-items.md\`, \`raid.md\`,
+\`decisions.md\`, \`knowledge.md\`, \`meetings.md\`, \`communications.md\`, and \`history/\`.
+All files are maintained by agents and require TPM approval before changes are committed.
+
+Current streams: ${STREAMS[*]}
+
+To add a stream later, copy the framework template:
+  cp -r $FRAMEWORK_DIR/program/streams/_template streams/<new-stream>
 
 ## Data Sources
 Local data files are in \`/data\`. Drop exported emails, documents, meeting notes, and chat logs there.
@@ -85,12 +109,13 @@ Agents will read from \`/data\` when live integrations are not configured.
 When running any agent, always:
 1. Read the agent definition from \`$FRAMEWORK_DIR/agents/<agent-name>.md\`
 2. Read the relevant process from \`$FRAMEWORK_DIR/processes/<process-name>.md\`
-3. Read current program state from \`./program/\`
+3. Identify the active stream and read its state from \`./streams/<stream>/\`,
+   starting with \`context.md\` and \`team.md\`
 4. Read data from \`./data/\` as the local data source
 
 ## Conventions
 - Role names are always capitalized: Engineering, Product, Stakeholders, QA, SRE
-- All agent outputs require TPM approval before being written to \`/program\`
+- All agent outputs require TPM approval before being written to \`streams/<stream>/\`
 - Never commit \`.env\` — credentials stay local
 
 ## Launching with TPM Skills
@@ -115,4 +140,5 @@ echo "  3. Run /tpm:kickoff to start the program"
 echo "  4. Add inputs to ./data/ (emails, docs, meeting notes)"
 echo ""
 
-echo "{\"status\": \"created\", \"program\": \"$PROGRAM_NAME\", \"path\": \"$TARGET_PATH\"}"
+printf '{"status": "created", "program": "%s", "path": "%s", "streams": "%s"}\n' \
+  "$PROGRAM_NAME" "$TARGET_PATH" "${STREAMS[*]}"

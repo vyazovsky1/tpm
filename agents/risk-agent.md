@@ -11,8 +11,8 @@ Monitors, identifies, scores, and tracks program risks. Keeps the risk register 
 | SonarQube | Security vulnerabilities, quality gate failures | — |
 | GitHub | Failed pipelines, stale PRs, dependency alerts | — |
 | Confluence | Risk documentation, ADRs | — |
-| /program/risks.md | Current risk register | risks.md |
-| /program/dependencies.md | Dependency status | — |
+| streams/<stream>/raid.md | Risks section of the RAID log | raid.md |
+| streams/<stream>/raid.md | Dependencies section (status) | — |
 
 ## Triggers
 - Scheduled: weekly risk review
@@ -24,7 +24,7 @@ Monitors, identifies, scores, and tracks program risks. Keeps the risk register 
 - Scores risks by likelihood and impact
 - Flags risks approaching or exceeding threshold
 - Proposes mitigation strategies for TPM review
-- Archives resolved risks to `/program/history/risks`
+- Archives resolved risks to `streams/<stream>/history/`
 
 ## Outputs
 - Updated risk register (pending TPM approval)

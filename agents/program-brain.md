@@ -16,12 +16,11 @@ Central orchestrator and Chief of Staff for the TPM. Drives the program kickoff 
 | Google Drive | Program brief, vision docs, interview notes, workshop outputs | — | MVP |
 | Gmail | Stakeholder communications, escalations | — | MVP |
 | Google Chat | Team signals, blockers, informal decisions | — | MVP |
-| /program/model.md | Scope, sizing, milestones, capacity | model.md (TPM approval required) | MVP |
-| /program/risks.md | Risk register | — | MVP |
-| /program/dependencies.md | Dependency map | — | MVP |
-| /program/knowledge.md | Knowledge taxonomy health | — | MVP |
-| /program/stakeholders.md | Stakeholder map, RACI | — | MVP |
-| /program/communications.md | Communication log | — | MVP |
+| streams/<stream>/context.md | Scope, sizing, milestones, standing instructions | context.md (TPM approval required) | MVP |
+| streams/<stream>/raid.md | RAID — risks, assumptions, issues, dependencies | raid.md (TPM approval required) | MVP |
+| streams/<stream>/knowledge.md | Knowledge index, open gaps | — | MVP |
+| streams/<stream>/team.md | Team & Stakeholders, RACI | — | MVP |
+| streams/<stream>/communications.md | Communication log | — | MVP |
 | Jira | Epics, milestones, blockers | — | Out of MVP scope |
 | GitHub | CI/CD status, PR health | — | Out of MVP scope |
 | SonarQube | Code quality trends | — | Out of MVP scope |
@@ -42,9 +41,9 @@ Program Brain drives four sequential steps from program start to a refined backl
 - Summarize program scope: objectives, success criteria, known constraints
 - Identify Stakeholders; suggest initial RACI
 - Surface top 5 assumptions that need validation before planning
-- Delegate to Communications Agent: initialize `/program/stakeholders.md`
+- Delegate to Communications Agent: initialize `streams/<stream>/team.md`
 
-**Output for TPM approval:** Scope summary + initial Stakeholder map in `/program/stakeholders.md`
+**Output for TPM approval:** Scope summary + initial Stakeholder map in `streams/<stream>/team.md`
 
 ### Step 2 — Sizing and Milestone Plan
 **Input:** Approved scope summary from Step 1 and any capacity inputs.
@@ -52,10 +51,10 @@ Program Brain drives four sequential steps from program start to a refined backl
 - Draft high-level sizing for each area of scope (t-shirt: XS / S / M / L / XL)
 - Estimate team capacity per milestone period
 - Propose milestone plan: milestone names, target dates, entry criteria, owners
-- Identify top 5 risks to the plan; add to `/program/risks.md`
-- Update `/program/model.md` with scope, sizing, capacity, and milestones
+- Identify top 5 risks to the plan; add to the Risks section of `streams/<stream>/raid.md`
+- Update `streams/<stream>/context.md` with scope, sizing, capacity, and milestones
 
-**Output for TPM approval:** Sizing table + milestone plan + risk register in `/program/model.md` and `/program/risks.md`
+**Output for TPM approval:** Sizing table + milestone plan + risk register in `streams/<stream>/context.md` and `streams/<stream>/raid.md`
 
 ### Step 3 — Backlog Draft
 **Input:** Approved model.md from Step 2.
@@ -72,10 +71,10 @@ Program Brain drives four sequential steps from program start to a refined backl
 **Actions:**
 - Delegate to Requirements Agent: refine story point estimates and roll up to epic level
 - Requirements Agent checks: all stories have acceptance criteria, all epics are sized, NFRs are defined
-- Update `/program/model.md` with refined milestone plan based on story points and capacity
+- Update `streams/<stream>/context.md` with refined milestone plan based on story points and capacity
 - Delegate to Knowledge Agent: initialize Confluence taxonomy structure for the program
 
-**Output for TPM approval:** Refined milestone plan in `/program/model.md` + Confluence taxonomy initialized
+**Output for TPM approval:** Refined milestone plan in `streams/<stream>/context.md` + Confluence taxonomy initialized
 
 ## Health Check Format
 When the TPM runs a health check (`/tpm-health`), Brain reads all program state and surfaces:
@@ -117,14 +116,14 @@ When the TPM runs a health check (`/tpm-health`), Brain reads all program state 
 Brain never delegates approval authority. All agent outputs return to Brain for synthesis before presenting to TPM.
 
 ## Behaviors
-- Reads all `/program` state files at the start of every session
+- Reads the active stream's `streams/<stream>/` state files at the start of every session; aggregates across streams for health and reporting
 - Reads data sources relevant to the active workflow step before acting
 - Delegates deep-domain work to specialist agents; synthesizes results
 - Surfaces deviations between plan and reality; proposes corrective actions
-- Never updates `/program` state without TPM approval
+- Never updates `streams/<stream>/` state without TPM approval
 
 ## Requires TPM Approval
-- Any update to `/program/model.md`, `/program/risks.md`, or `/program/dependencies.md`
+- Any update to `streams/<stream>/context.md` or `streams/<stream>/raid.md`
 - Initiating Step 2, 3, or 4 (each step begins only after prior step is approved)
 - Escalations to Stakeholders
 - Plan revisions

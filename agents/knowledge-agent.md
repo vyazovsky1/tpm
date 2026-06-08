@@ -14,7 +14,7 @@ Enforces program knowledge structure according to the standard taxonomy. Detects
 |--------|--------------|----------------|-------|
 | Confluence | Taxonomy structure, existing pages, page labels | Taxonomy folder structure (program init only) | MVP |
 | Google Drive | Program documents | — | MVP |
-| /program/knowledge.md | Taxonomy health status | knowledge.md (TPM approval required) | MVP |
+| streams/<stream>/knowledge.md | Knowledge index, open gaps | knowledge.md (TPM approval required) | MVP |
 | Gmail | Communications referencing documents | — | MVP |
 | Google Chat | Communications referencing documents | — | MVP |
 | Jira | Epics with architecture/design scope (for ADR gap detection) | Action items for missing documents | Out of MVP scope |
@@ -35,7 +35,7 @@ Enforces program knowledge structure according to the standard taxonomy. Detects
 
 ## Agent Rules
 
-1. **Session start** — read `/program/knowledge.md` to load current taxonomy health and open gaps before acting.
+1. **Session start** — read `streams/<stream>/knowledge.md` to load current taxonomy health and open gaps before acting.
 
 2. **Program init** — when the program is first set up, create the full standard taxonomy folder structure in the Confluence program space. Create a Per Project section for each known project repository. Notify TPM when complete.
 
@@ -45,7 +45,7 @@ Enforces program knowledge structure according to the standard taxonomy. Detects
    - Detect document references using signal phrases: "the spec", "the runbook", "the design doc", "the ADR for", "the test plan", "per the charter", "the architecture doc", "the SLA", "the release plan"
    - For each reference, identify the most likely taxonomy section
    - Query Confluence for a matching document in that section
-   - If missing: create an action item in Jira assigned to the section owner (per taxonomy ownership map), add to open gaps in `/program/knowledge.md`
+   - If missing: create an action item in Jira assigned to the section owner (per taxonomy ownership map), add to open gaps in `streams/<stream>/knowledge.md`
    - If found: no action
 
 5. **Taxonomy compliance check** — on schedule:
@@ -53,7 +53,7 @@ Enforces program knowledge structure according to the standard taxonomy. Detects
    - For each empty or missing section, create or update a gap record with section name, responsible owner, and date identified
    - Present compliance report to TPM
 
-6. **Gap tracking** — maintain open gaps in `/program/knowledge.md`:
+6. **Gap tracking** — maintain open gaps in `streams/<stream>/knowledge.md`:
    - Gap ID, taxonomy section, missing document description, responsible owner, date identified, due date, status
    - Flag gaps overdue by more than 5 business days to TPM for escalation
 
@@ -67,10 +67,10 @@ Enforces program knowledge structure according to the standard taxonomy. Detects
 - Jira action items for missing documents assigned to responsible team managers
 - Knowledge health report: taxonomy compliance status with gap details and owners
 - Overdue gap alerts for TPM escalation
-- Updated `/program/knowledge.md` taxonomy health status (TPM approval required)
+- Updated `streams/<stream>/knowledge.md` taxonomy health status (TPM approval required)
 
 ## Requires TPM Approval
-- Updates to `/program/knowledge.md`
+- Updates to `streams/<stream>/knowledge.md`
 - Escalating a gap to Stakeholders
 - Reassigning gap ownership
 - Any deviation from the standard taxonomy structure

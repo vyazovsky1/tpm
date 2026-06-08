@@ -36,7 +36,7 @@
 | Non-Functional Requirements with measurable thresholds | Confluence: 3. Requirements / Non-Functional Requirements |
 | Cross-team contracts (API specs, SLAs, data contracts) | Confluence: 3. Requirements / Acceptance Criteria |
 | Detailed estimation per epic / feature | Jira (story points) |
-| Refined milestone plan | `/program/model.md` + Confluence: 2. Planning |
+| Refined milestone plan | `streams/<stream>/context.md` + Confluence: 2. Planning |
 | Requirements traceability matrix | Confluence: 3. Requirements |
 
 ## Quality Gates
