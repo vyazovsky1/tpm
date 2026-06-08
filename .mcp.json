@@ -1,15 +1,15 @@
 {
   "mcpServers": {
     "gmail-tpm": {
-      "command": "/mnt/c/Dev/tpm/scripts/mcp-google.sh",
+      "command": "${CLAUDE_PLUGIN_ROOT}/scripts/mcp-google.sh",
       "args": ["npx", "-y", "@modelcontextprotocol/server-gmail"]
     },
     "google-drive-tpm": {
-      "command": "/mnt/c/Dev/tpm/scripts/mcp-google.sh",
+      "command": "${CLAUDE_PLUGIN_ROOT}/scripts/mcp-google.sh",
       "args": ["npx", "-y", "@modelcontextprotocol/server-gdrive"]
     },
     "google-calendar-tpm": {
-      "command": "/mnt/c/Dev/tpm/scripts/mcp-google.sh",
+      "command": "${CLAUDE_PLUGIN_ROOT}/scripts/mcp-google.sh",
       "args": ["npx", "-y", "@modelcontextprotocol/server-google-calendar"]
     }
   }

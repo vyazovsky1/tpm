@@ -1,0 +1,16 @@
+{
+  "$schema": "https://code.claude.com/schema/marketplace.json",
+  "name": "tpm",
+  "owner": {
+    "name": "Aleksey Vyazovsky"
+  },
+  "description": "AI-First Technical Program Management framework — agents, skills, and processes for TPMs.",
+  "plugins": [
+    {
+      "name": "tpm",
+      "source": "./",
+      "description": "AI-First Technical Program Management — agent skills for TPMs covering program setup, kickoff, planning, backlog, estimation, and health monitoring.",
+      "license": "MIT"
+    }
+  ]
+}

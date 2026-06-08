@@ -8,6 +8,48 @@ It provides program teams with the structured set of the requirements, documents
 Business Value 
 Deliver reliably more programs, more predictably, at lower risk and cost by ensuring every program runs according to plan, identifying and resolving deviations early, and always having a reliable visibility into program health to make confident business decisions.
 
+# Installation
+
+This repo is a Claude Code plugin **and** its own plugin marketplace. Installing it pulls the agents, skills, and MCP server configuration directly from GitHub — no local clone or path setup required.
+
+## Install the plugin
+
+Inside Claude Code:
+
+```
+/plugin marketplace add vyazovsky1/tpm
+/plugin install tpm@tpm
+```
+
+- `/plugin marketplace add vyazovsky1/tpm` — clones this GitHub repo and registers its marketplace. **This is where the GitHub link is supplied**; everything after refers to the registered marketplace by name.
+- `/plugin install tpm@tpm` — installs the plugin. The syntax is `<plugin>@<marketplace>`; both the plugin (`.claude-plugin/plugin.json`) and the marketplace (`.claude-plugin/marketplace.json`) are named `tpm`.
+
+To update later: `/plugin marketplace update tpm`.
+
+## One-time Google authentication (per machine)
+
+The Gmail, Drive, and Calendar MCP servers need Google OAuth credentials, stored in a `.env` that is **not** part of the plugin (it is gitignored). Set it up once per laptop:
+
+1. Create a Google Cloud project and an OAuth 2.0 client (Desktop app type).
+2. Enable the Gmail API, Drive API, and Calendar API.
+3. Run the auth helper, which opens a browser and writes the refresh token:
+   ```bash
+   node scripts/google-auth.js
+   ```
+
+The MCP servers (configured in `.mcp.json`) launch via `scripts/mcp-google.sh`, which loads `.env` automatically. Paths use `${CLAUDE_PLUGIN_ROOT}`, so they resolve wherever the plugin is installed. **Requires bash** (WSL on Windows) for the launcher script.
+
+## Setting up a program
+
+Each program gets its own folder that references this framework:
+
+```bash
+bash scripts/new-program.sh <program-name> <target-path>
+cd <target-path>
+claude .
+# then run /tpm-kickoff inside Claude Code
+```
+
 # Current Capabilities 
 
 | SDLC Stage | Goals | TPM Tasks |
