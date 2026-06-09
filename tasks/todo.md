@@ -41,7 +41,7 @@
 
 ## Task 8 — Stream-scoped program structure (refactor) ✓
 Drop the `/program` folder from generated program folders; everything lives under `streams/<stream>/`. See `docs/ideas/stream-model.md`.
-- [x] Restructure framework `program/` templates into a per-stream template set (`program/streams/_template/`): `context.md`, `team.md`, `action-items.md`, `raid.md`, `decisions.md`, `knowledge.md`, `meetings.md`, `communications.md`, `history/`
+- [x] Restructure framework `program/` templates into a per-stream template set (`program/streams/_template/`): `context.md`, `team.md`, `action-items.md`, `raid.md`, `decisions.md`, `knowledge.md`, `meetings/`, `communications.md`, `history/`
 - [x] Update all agent files to reference `streams/<stream>/...` instead of `/program/...`
 - [x] Update `scripts/new-program.sh` / `init.sh` to scaffold `streams/` (one stream per init arg, `<stream-name>` substitution) + streams init question in `skills/init/SKILL.md`
 - [x] Update `CLAUDE.md` to document the streams-only structure
@@ -62,15 +62,18 @@ No hardcoded template content in scripts. All scaffold content lives as real fil
 - [x] `init.sh` — `render()` helper (sed, `|` delimiter); replaced all four heredocs with `render`/`cp` from `program/templates/`
 - [x] Framework `CLAUDE.md` — "Scaffold Templates" section + Directory Structure updated; verified byte-identical scaffolder output
 
-## Task 9 — Meetings Agent
+## Task 9 — Meetings Agent ✓
 Stream-scoped agent: ingest notes → summary + action items → follow-up agenda. Built on Task 8.
-- [ ] `agents/meetings-agent.md`
-- [ ] `integrations/meeting-notes.md` — platform-agnostic notes abstraction; tool captured at init, stored in program `CLAUDE.md`
-- [ ] `/meeting-summary <stream>` and `/meeting-prep <stream>` commands in `scripts/new-program.sh`
-- [ ] `agents/program-brain.md` — delegation row for Meetings Agent
-- [ ] `agents/communications-agent.md` — write action items into stream `action-items.md`
-- [ ] `processes/communication-management.md` — Meeting Management section
-- [ ] `.claude-plugin/plugin.json` — register `meetings-agent`
+- [x] `agents/meetings-agent.md`
+- [x] `integrations/meeting-notes.md` — platform-agnostic notes abstraction (drive/confluence/pasted); tool captured at init, stored in program `CLAUDE.md`, optional per-stream override in `context.md`
+- [x] `/tpm:meeting-summary <stream>` and `/tpm:meeting-prep <stream>` as skills (`skills/meeting-summary/`, `skills/meeting-prep/`) — the framework's command mechanism is plugin skills, not `scripts/new-program.sh`
+- [x] `skills/meeting-summary/summary-template.md` — common summary template (one format for all streams); summaries are one file per meeting under `streams/<stream>/meetings/`, **Notes source** = resource URL from integration metadata
+- [x] `skills/meeting-prep/agenda-template.md` — common agenda template: per-teammate (open items + updates since last call, "as available" from connected sources) → issues/blockers/dependencies → new for discussion. Code/Jira contributions populate once phase-2 integrations land
+- [x] `agents/program-brain.md` — delegation row for Meetings Agent
+- [x] `agents/communications-agent.md` — action items shared store with Meetings Agent (no fork)
+- [x] `processes/communication-management.md` — filled to convention + Meeting Management section
+- [x] `.claude-plugin/plugin.json` — register `meetings-agent`
+- [x] `program/templates/integrations.md` — `meeting-notes` registry row; `CLAUDE.md` MVP scope updated
 - [ ] Phase 2 (later): team-pulse digest + `integrations/gitlab.md`
 
 ## Backlog (later)

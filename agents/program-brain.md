@@ -111,6 +111,7 @@ When the TPM runs a health check (`/tpm-health`), Brain reads all program state 
 | Backlog drafting or estimation | Requirements Agent | Milestone plan update |
 | Knowledge taxonomy gap | Knowledge Agent | TPM escalation |
 | Stakeholder comms, RACI update | Communications Agent | Decision to escalate |
+| Meeting summary, action-item extraction, follow-up agenda (per stream) | Meetings Agent | Plan/milestone impact of decisions and action items |
 | Any other signal | Brain handles directly | — |
 
 Brain never delegates approval authority. All agent outputs return to Brain for synthesis before presenting to TPM.

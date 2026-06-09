@@ -20,7 +20,7 @@ tasks/           — Implementation plan and todo tracker
 ```
 
 ## Generated Program Structure
-A generated program folder has **no `/program` folder**. All live state lives under `streams/<stream>/`, one folder per stream (track / workstream); the set of subfolders under `streams/` is the stream registry. Each stream folder holds: `context.md`, `team.md`, `action-items.md`, `raid.md` (Risks, Assumptions, Issues, Dependencies), `decisions.md`, `knowledge.md`, `meetings.md`, `communications.md`, and `history/`. Risks, dependencies, issues, and action items are all per-stream; a cross-stream dependency or action item is duplicated in each affected stream with a reference to the other. Program-wide aggregation (e.g., a combined status report) is generated across streams, not stored. Agents operating in a stream read its `context.md` + `team.md` first. See `docs/ideas/stream-model.md`.
+A generated program folder has **no `/program` folder**. All live state lives under `streams/<stream>/`, one folder per stream (track / workstream); the set of subfolders under `streams/` is the stream registry. Each stream folder holds: `context.md`, `team.md`, `action-items.md`, `raid.md` (Risks, Assumptions, Issues, Dependencies), `decisions.md`, `knowledge.md`, `meetings/` (one summary file per meeting), `communications.md`, and `history/`. Risks, dependencies, issues, and action items are all per-stream; a cross-stream dependency or action item is duplicated in each affected stream with a reference to the other. Program-wide aggregation (e.g., a combined status report) is generated across streams, not stored. Agents operating in a stream read its `context.md` + `team.md` first. See `docs/ideas/stream-model.md`.
 
 Two non-stream items live at the program root:
 - **`integrations.md`** — the program's integration registry (markdown, committed). Each row binds a source (named for its framework spec / MCP server) to its scope and the stream it feeds. Edited by hand or by a script. No secrets — those stay in `.env`.
@@ -53,10 +53,10 @@ Use `template.md` as the base. AI Capabilities table columns: Area | AI Role | H
 Each integration file must have: Purpose → Standard Queries (named queries with syntax) → Field Mapping table. Standard Queries are the exact calls agents make — keep them precise and copy-pasteable.
 
 ## MVP Scope
-**Agents:** Program Brain, Knowledge Agent, Requirements Agent, Communications Agent  
+**Agents:** Program Brain, Knowledge Agent, Requirements Agent, Communications Agent, Meetings Agent  
 **SDLC stages:** Planning, Requirements  
-**Processes:** Knowledge Management  
-**Integrations:** Confluence, Google Drive, Gmail, Google Chat
+**Processes:** Knowledge Management, Communication Management  
+**Integrations:** Confluence, Google Drive, Gmail, Google Chat, Meeting Notes
 
 Everything else in this repo is defined but out of MVP scope. Out-of-MVP items are kept because they define the full framework shape; they are not executed until explicitly included.
 

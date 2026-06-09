@@ -16,7 +16,7 @@ Generated program folders drop the `/program` folder. Everything lives under `st
       raid.md           # RAID log — Risks, Assumptions, Issues, Dependencies
       decisions.md      # decision log
       knowledge.md      # index of artifacts / KB links
-      meetings.md       # meeting log
+      meetings/         # one summary file per meeting (the listing is the log)
       communications.md # email/chat comms log
       history/          # archived closed items, past meetings, retired agendas
     fraud-detection/ ...
@@ -36,7 +36,7 @@ Generated program folders drop the `/program` folder. Everything lives under `st
 Every stream-scoped agent loads the relevant `streams/<stream>/context.md` + `team.md` **first**, so its output inherits that stream's standing instructions and roster. Program Brain aggregates *across* streams for health/reporting.
 
 ## Framework changes (refactor)
-- Restructure the framework's `program/` templates into a per-stream template set: `context.md`, `team.md`, `action-items.md`, `raid.md`, `decisions.md`, `knowledge.md`, `meetings.md`, `communications.md`, `history/`.
+- Restructure the framework's `program/` templates into a per-stream template set: `context.md`, `team.md`, `action-items.md`, `raid.md`, `decisions.md`, `knowledge.md`, `meetings/`, `communications.md`, `history/`.
 - Update **all agent files** to reference `streams/<stream>/...` instead of `/program/...`.
 - Update `scripts/new-program.sh` to scaffold `streams/` with one template stream + init questions.
 - Update `CLAUDE.md` to document the streams-only structure.

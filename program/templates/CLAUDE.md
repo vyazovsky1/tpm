@@ -10,7 +10,7 @@ This folder contains program-specific state and data only.
 There is no `/program` folder. All live state lives under `streams/<stream>/`, one folder per
 stream (track / workstream). The set of subfolders under `streams/` is the stream registry.
 Each stream folder contains: `context.md`, `team.md`, `action-items.md`, `raid.md`,
-`decisions.md`, `knowledge.md`, `meetings.md`, `communications.md`, and `history/`.
+`decisions.md`, `knowledge.md`, `meetings/` (one summary file per meeting), `communications.md`, and `history/`.
 All files are maintained by agents and require TPM approval before changes are committed.
 
 Current streams: {{STREAMS}}

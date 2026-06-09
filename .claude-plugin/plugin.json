@@ -12,6 +12,7 @@
     "./agents/program-brain.md",
     "./agents/knowledge-agent.md",
     "./agents/requirements-agent.md",
-    "./agents/communications-agent.md"
+    "./agents/communications-agent.md",
+    "./agents/meetings-agent.md"
   ]
 }

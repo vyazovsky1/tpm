@@ -14,6 +14,7 @@ written by a script.
 | gmail        | no      | {{label or query}}      | <stream>  | no                     |
 | confluence   | no      | {{space key}}           | <stream>  | no                     |
 | google-chat  | no      | {{space name}}          | <stream>  | .data/google-chat/     |
+| meeting-notes| no      | {{drive/confluence/pasted}} | <stream> | .data/meeting-notes/   |
 
 ## How agents use this
 1. Read this file to discover enabled sources and their stream mapping.

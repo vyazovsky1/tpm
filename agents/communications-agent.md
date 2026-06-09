@@ -20,7 +20,7 @@ _Includes Stakeholder management responsibilities. The standalone Stakeholder Ag
 | Google Calendar | Upcoming meetings, review deadlines, attendance | — | Out of MVP scope |
 | streams/<stream>/communications.md | Communication log | communications.md (TPM approval required) | MVP |
 | streams/<stream>/team.md | Team & Stakeholders, RACI, engagement status | team.md (TPM approval required) | MVP |
-| streams/<stream>/action-items.md | Open action items from comms threads | action-items.md (TPM approval required) | MVP |
+| streams/<stream>/action-items.md | Open action items from comms threads | action-items.md (TPM approval required) | MVP — shared store with Meetings Agent; never fork a separate list |
 
 ## Triggers
 - Scheduled: weekly Stakeholder engagement review

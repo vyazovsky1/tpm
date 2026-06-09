@@ -9,7 +9,7 @@
 A dedicated, **stream-scoped** Meetings Agent delivering capabilities 1–3. It always operates inside one stream and loads that stream's `context.md` + `team.md` first, so output inherits the stream's standing instructions and roster. Cross-meeting reconciliation **proposes** `[x]` closures; the TPM approves every write. The **team-pulse contribution digest is phase 2** (built on Reporting Agent; needs a new `integrations/gitlab.md`).
 
 ## How it works (per stream)
-- **`/meeting-summary <stream>`** — reads new notes via the `meeting-notes` integration → drafts summary + extracts action items (owner resolved from `team.md`) → on approval, appends summary to `meetings.md` and items to `action-items.md`. **Creating the summary also moves the meeting's prior follow-up agenda document into `history/`.**
+- **`/meeting-summary <stream>`** — reads new notes via the `meeting-notes` integration → drafts summary + extracts action items (owner resolved from `team.md`) → on approval, writes the summary as one file per meeting under `meetings/` and items to `action-items.md`. **Creating the summary also moves the meeting's prior follow-up agenda document into `history/`.**
 - **Reconciliation** — scans recent notes/threads for items later notes resolved → *proposes* `[x]` closures in `action-items.md` (never auto-closes) → closed items archive to `history/`.
 - **`/meeting-prep <stream>`** — produces a **follow-up agenda document** from three stream sources: open items in `action-items.md`, open Assumptions / Risks-needing-discussion in `raid.md`, and unanswered threads in `communications.md`.
 
